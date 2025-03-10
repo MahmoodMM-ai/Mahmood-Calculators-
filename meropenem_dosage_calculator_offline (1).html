@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meropenem Dosage Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(to right, #34495e, #2c3e50);
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            margin: auto;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 18px;
+            width: 90%;
+            border-radius: 5px;
+            border: none;
+        }
+        h1 {
+            color: #FFD700;
+        }
+        button {
+            background-color: #FFD700;
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #FFA500;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pediatric Meds Quick Guide</h1>
+    <div class="container">
+        <h2>Meropenem Dosage Calculator</h2>
+        <p>Enter the patient's age (months) and weight (kg) to determine suitability and calculate dosage:</p>
+        <input type="number" id="age" placeholder="Enter age in months" oninput="checkAge()">
+        <input type="number" id="weight" placeholder="Enter weight in kg">
+        <select id="indication">
+            <option value="20">Bacterial Meningitis (20 mg/kg every 8 hours)</option>
+            <option value="10">Complicated Intra-Abdominal Infections (10 mg/kg every 8 hours)</option>
+            <option value="40">Nosocomial Pneumonia (40 mg/kg every 8 hours)</option>
+            <option value="30">Severe Sepsis (30 mg/kg every 8 hours)</option>
+        </select>
+        <button onclick="calculateDosage()">Calculate</button>
+        <h2 id="ageResult"></h2>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        function checkAge() {
+            let age = document.getElementById('age').value;
+            if (age < 3) {
+                document.getElementById('ageResult').innerText = "Warning: Meropenem is not recommended for infants under 3 months old.";
+            } else {
+                document.getElementById('ageResult').innerText = "";
+            }
+        }
+
+        function calculateDosage() {
+            let weight = document.getElementById('weight').value;
+            let doseFactor = document.getElementById('indication').value;
+            if (weight > 0) {
+                let dosage = weight * doseFactor;
+                document.getElementById('result').innerText = "Recommended Dose: " + dosage + " mg every 8 hours";
+            } else {
+                document.getElementById('result').innerText = "Please enter a valid weight.";
+            }
+        }
+    </script>
+</body>
+</html>
